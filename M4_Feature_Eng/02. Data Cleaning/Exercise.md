@@ -5,20 +5,51 @@
 ### ❓ Missing values
 
 1. What is the missing datatype used in pandas?
-2. How to replace all occurences of the value 9999 to missing in pandas?
-3. How to get the absolute number of missings for each variable in pandas?
-4. How to get the percentage of missings for each variable in pandas?
-5. How to drop rows with missing values?
-6. How to drop variables with missing values?
-7. What is the univariate imputation method in sklearn?
-8. What is the multivariate imputation method in sklearn?
-9. What is the best univariate imputation method to categorical variables? (Explain why)
-10. What is the best univariate imputation method to numerical variables? (Explain why)
+Answer: There are generally three data types:
+. Numerical e.g:- income, age
+. Categorical e.g:- Gender, Nationality
+. Ordinal e.g:- Low, medium, High
 
+Models can only handle numeric features
+Pandas will recognize empty cells, constants (0, -1, 99, 999) and NA types, etc. as missing values
+
+2. How to replace all occurences of the value 9999 to missing in pandas?
+Answer: from Sklearn import SimpleImputer , strategy set at 'constant', 
+sklearn.impute.SimpleImputer(missing_values=999, strategy='constant', fill_value=missing)
+
+3. How to get the absolute number of missings for each variable in pandas?
+Answer:for variable x; 
+    absolute number is missing is given by;  x.isnull().sum()
+
+4. How to get the percentage of missings for each variable in pandas?
+Answer: for variable x;
+        x.isnull().sum() / len(x)
+
+5. How to drop rows with missing values?
+Answer: df = df.dropna(axis=0)
+
+6. How to drop variables with missing values?
+Answer: df.dropna(axis = 'columns')
+
+7. What is the univariate imputation method in sklearn?
+Answer: Univariate imputation method in sklearn tries to reconstruct the feature by imputing only non-missing values in that feature. This is achieved through calc and imputing: means, median, most_frequent or constant values into the missing columns. (SimpleImputer).
+
+8. What is the multivariate imputation method in sklearn?
+Answer: The multivariate imputation method in sklearn uses the entire set of the available feature dimensions to estimate the missing values. (impute.IterativeImputer)
+It does so by modeling each feature with missing values as a function of other features, and uses that estimate for imputation. It does so in an iterated round-robin fashion: at each step, a feature column is designated as output y and the other feature columns are treated as inputs X. A regressor is fit on (X, y) for known y. Then, the regressor is used to predict the missing values of y. This is done for each feature in an iterative fashion, and then is repeated for max_iter imputation rounds. The results of the final imputation round are returned.
+
+9. What is the best univariate imputation method to categorical variables? (Explain why)
+Answer: impute.SimpleImputer(strategy='constant')
+
+10. What is the best univariate imputation method to numerical variables? (Explain why)
+Answer: impute.SimpleImputer(strategy='median')
+    Because the median is a better representation of data distribution within a feature than its mean.
 
 ### 🔎 Outliers
 
 1. What is an outlier?
+Answer: An outlier is an observation that deviates drastically from other observations in a dataset
+
 2. What is a simple method to detect and deal with outliers of a numerical variable?
 3. What is novelty detection?
 4. Name 4 advanced methods of outlier detection in sklearn.
@@ -35,8 +66,11 @@
 
 Consider the following dataset: [San Francisco Building Permits](https://www.kaggle.com/aparnashastry/building-permit-applications-data). Look at the columns "Street Number Suffix" and "Zipcode". Both of these contain missing values.
 
-- Which, if either, are missing because they don't exist?
+- Which, if either, are missing because they don't exist? 
+    'Street Number Suffix' appears missing because it doesn't exist.
+
 - Which, if either, are missing because they weren't recorded?
+    'Zipcode' is likely missing because it wasn't recorded.
 
 Hint: Do all addresses generally have a street number suffix? Do all addresses generally have a zipcode?
 
