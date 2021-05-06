@@ -11,39 +11,43 @@ Answer: There are generally three data types:
 . Ordinal e.g:- Low, medium, High
 
 Models can only handle numeric features
-Pandas will recognize empty cells, constants (0, -1, 99, 999) and NA types, etc. as missing values
+Pandas will recognize empty cells, constants (0, -1, 99, 999) and NA types, etc. as missing values          `np.NaN`
 
 2. How to replace all occurences of the value 9999 to missing in pandas?
 Answer: from Sklearn import SimpleImputer , strategy set at 'constant', 
-sklearn.impute.SimpleImputer(missing_values=999, strategy='constant', fill_value=missing)
+sklearn.impute.SimpleImputer(missing_values=999, strategy='constant', fill_value=missing)             `df.replace(9999, np.NaN)`
 
 3. How to get the absolute number of missings for each variable in pandas?
-Answer:for variable x; 
+Answer:for variable x;      `df.isnull().sum()` or `df.isna().sum()`
     absolute number is missing is given by;  x.isnull().sum()
 
 4. How to get the percentage of missings for each variable in pandas?
-Answer: for variable x;
+Answer: for variable x;`df.isnull().sum() / len(df)` or `df.isna().sum() / len(df)`
         x.isnull().sum() / len(x)
 
 5. How to drop rows with missing values?
-Answer: df = df.dropna(axis=0)
+Answer: df = df.dropna(axis=0)  `df.dropna(axis=0)` or `df.dropna(axis="index")`
 
 6. How to drop variables with missing values?
-Answer: df.dropna(axis = 'columns')
+Answer: df.dropna(axis = 'columns') 
+`df.dropna(axis=1)` or `df.dropna(axis="columns")`
 
 7. What is the univariate imputation method in sklearn?
-Answer: Univariate imputation method in sklearn tries to reconstruct the feature by imputing only non-missing values in that feature. This is achieved through calc and imputing: means, median, most_frequent or constant values into the missing columns. (SimpleImputer).
+Answer: Univariate imputation method in sklearn tries to reconstruct the feature by imputing only non-missing values in that feature. This is achieved through calc and imputing: means, median, most_frequent or constant values into the missing columns. (SimpleImputer).    `SimpleImputer()`
 
 8. What is the multivariate imputation method in sklearn?
-Answer: The multivariate imputation method in sklearn uses the entire set of the available feature dimensions to estimate the missing values. (impute.IterativeImputer)
+Answer: The multivariate imputation method in sklearn uses the entire set of the available feature dimensions to estimate the missing values. (impute.IterativeImputer) `IterativeImputer()` and `KNNImputer()`
 It does so by modeling each feature with missing values as a function of other features, and uses that estimate for imputation. It does so in an iterated round-robin fashion: at each step, a feature column is designated as output y and the other feature columns are treated as inputs X. A regressor is fit on (X, y) for known y. Then, the regressor is used to predict the missing values of y. This is done for each feature in an iterative fashion, and then is repeated for max_iter imputation rounds. The results of the final imputation round are returned.
 
 9. What is the best univariate imputation method to categorical variables? (Explain why)
 Answer: impute.SimpleImputer(strategy='constant')
+Probably `SimpleImputer(strategy="constant", fill_value="missing")` because its creates a new category for missings.
 
 10. What is the best univariate imputation method to numerical variables? (Explain why)
 Answer: impute.SimpleImputer(strategy='median')
     Because the median is a better representation of data distribution within a feature than its mean.
+Probably `SimpleImputer` with `strategy="mean"` or `"median"` but with `add_indicator=True` because its creates a new column indicating the missing.
+
 
 ### 🔎 Outliers
 
@@ -51,14 +55,22 @@ Answer: impute.SimpleImputer(strategy='median')
 Answer: An outlier is an observation that deviates drastically from other observations in a dataset
 
 2. What is a simple method to detect and deal with outliers of a numerical variable?
+Plotting the distribution showing the points, something like a boxplot or a stripplot. Then remove the outlier by clipping the variable.
+
 3. What is novelty detection?
+Data is not polluted by outliers and we are interested in detecting whether a **new** observation is an outlier.
+
 4. Name 4 advanced methods of outlier detection in sklearn.
+`svm.OneClassSVM`, `ensemble.IsolationForest`, `neighbors.LocalOutlierFactor` and `covariance.EllipticEnvelope`.
 
 
 ### 🖋 Typos
 
 1. What is a typo?
+A typographical error.
+
 2. What is a good method of automatically detect typos?
+The fuzzywuzzy package.
 
 
 
