@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/olatunde/opt/anaconda3/envs/compvision/bin/python"
+    "python.pythonPath": "/Users/olatunde/opt/anaconda3/envs/Tuns_/bin/python",
+    "jupyter.jupyterServerType": "local"
 }
