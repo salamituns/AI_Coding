@@ -1,0 +1,41 @@
+/* css rule */
+/* selectors */
+/* declaration block */
+/* declaration */
+/* property */
+/* values */
+
+body {
+  color: blueviolet;
+}
+
+h1,
+h2 {
+  color: brown;
+}
+/* id selector */
+#heading {
+  color: green;
+  background-color: black;
+}
+#footer {
+  color: red;
+  background-color: seagreen;
+}
+
+/* class selector */
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+
+/* DIV SPAN */
+div {
+  color: red;
+  background: grey;
+}
+span {
+  text-transform: uppercase;
+}
